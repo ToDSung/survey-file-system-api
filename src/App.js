@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { loadFile } from './utils/myDicomParser'
 
 const getFile = async () => {
   // open file picker
@@ -8,6 +9,7 @@ const getFile = async () => {
   // get file contents
   const fileData = await fileHandle.getFile();
   console.log(fileData)
+  loadFile(fileData)
 }
 
 const directoryStructure = {}
