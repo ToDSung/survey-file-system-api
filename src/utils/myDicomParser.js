@@ -1,7 +1,7 @@
-
-
-
 import dicomParser from 'dicom-parser'
+
+// console.log = () =>{}
+
 function parseByteArray(byteArray) {
     // We need to setup a try/catch block because parseDicom will throw an exception
     // if you attempt to parse a non dicom part 10 file (or one that is corrupted)
