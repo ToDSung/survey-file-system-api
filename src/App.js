@@ -2,7 +2,7 @@ import './App.css';
 import { loadFile as loadDicomFile } from './utils/myDicomParser'
 import { loadFile as loadImageFile } from './utils/myImageLoader'
 
-// console.log = () => {}
+console.log = () => {}
 
 // 測試 jpg / png 讀取圖片metadata 效率
 // 使用 library https://github.com/blueimp/JavaScript-Load-Image => 目前只知道怎麼讀取圖片原始寬高
@@ -15,8 +15,7 @@ import { loadFile as loadImageFile } from './utils/myImageLoader'
 const TIMER_SINGLE_FILE = 'single_file'
 
 const addTimer = (timerName, callback) => async () => {
-  console.time(timerName)
-  await callback()
+  await callback(timerName)
   console.timeEnd(timerName)
 }
 
@@ -32,10 +31,11 @@ const handleLoad = (file) => {
   return
 }
 
-const getFile = async () => {
+const getFile = async (timerName) => {
   // open file picker
   const [fileHandle] = await window.showOpenFilePicker();
-
+  console.time(timerName)
+  
   // get file contents
   const fileData = await fileHandle.getFile();
   console.log(fileData)
@@ -46,9 +46,11 @@ const TIMER_DIRECTORY = 'directory'
 
 const directoryStructure = {}
 
-const getDirectory = async () => {
+const getDirectory = async (timerName) => {
   const directoryHandle = await window.showDirectoryPicker();
+  console.time(timerName)
   console.log(directoryHandle)
+
   for await (const fileHandle of getFilesRecursively(directoryHandle, directoryStructure)) {
     console.log(fileHandle);
   }
