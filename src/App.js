@@ -63,7 +63,7 @@ async function* getFilesRecursively (entry, currentDirectory) {
     if (fileData !== null) {
       // file.relativePath = getRelativePath(entry);
       currentDirectory[entry.name] = [fileData]
-      loadDicomFile(fileData)
+      handleLoad(fileData)
       yield fileData;
     }
   } else if (entry.kind === 'directory') {
